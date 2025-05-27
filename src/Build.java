@@ -50,7 +50,7 @@ public class Build {
     if (vertex == null) return "";
 
 
-    //Returns the longest word reachable from the vertex
+
     Set<Vertex<String>> visited = new HashSet<>();
     return longestHelper(vertex, visited);
   }
@@ -81,6 +81,25 @@ public class Build {
    * @param <T> the type of values stored in the vertices
    */
   public static <T> void printSelfLoopers(Vertex<T> vertex) {
+    if (vertex == null) return;
+
+
+    //Prints vertices that point to themselves
+    Set<Vertex<T>> visited = new HashSet<>();
+    printSelfHelper(vertex, visited);
+  }
+
+  private static <T> void printSelfHelper(Vertex<T> v, Set<Vertex<T>> visited) {
+    if (visited.contains(v)) return;
+    visited.add(v);
+
+    if (v.neighbors.contains(v)) {
+      System.out.println(v.data);
+    }
+
+    for (Vertex<T> neighbor : v.neighbors) {
+      printSelfHelper(neighbor, visited);
+    }
   }
 
   /**

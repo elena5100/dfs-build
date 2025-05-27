@@ -111,8 +111,29 @@ public class Build {
    * @return true if the destination is reachable from the start, false otherwise
    */
   public static boolean canReach(Airport start, Airport destination) {
-    return false;
+    Set<Airport> seen = new HashSet<>();
+    return tryToGo(start, destination, seen);
+}
+    public static boolean tryToGo(Airport now, Airport goal, Set<Airport> visited) {
+      if (now == null || visited.contains(now)) {
+          return false;
+      }
+  
+      if (now == goal) {
+          return true;
+      }
+  
+      visited.add(now);
+  
+      for (Airport next : now.getOutboundFlights()) {
+          if (tryToGo(next, goal, visited)) {
+              return true;
+          }
+      }
+  
+      return false;
   }
+    
 
   /**
    * Returns the set of all values in the graph that cannot be reached from the given starting value.

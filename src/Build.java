@@ -14,7 +14,8 @@ public class Build {
    * @param k the maximum word length (exclusive)
    */
   public static void printShortWords(Vertex<String> vertex, int k) {
-    if (vertex == null) return;
+    if (vertex == null) 
+  return;
 
     //Prints words shorter than k characters reachable from the vertex
 
@@ -23,7 +24,8 @@ public class Build {
   }
 
   private static void printHelper(Vertex<String> v, int k, Set<Vertex<String>> visited) {
-    if (visited.contains(v)) return;
+    if (visited.contains(v)) 
+    return;
     visited.add(v);
 
     if (v.data.length() < k) {
